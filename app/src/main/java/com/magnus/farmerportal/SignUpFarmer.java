@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpFarmer extends AppCompatActivity {
 
-    EditText name, user1, pass, cnfrmpass;
+    EditText name, user1, pass, cnfrmpass,phone;
     Button signin;
     ImageView rback;
     Cursor cursor;
@@ -38,6 +38,7 @@ public class SignUpFarmer extends AppCompatActivity {
         rshow = (CheckBox) findViewById(R.id.rshowPass);
         signin = (Button) findViewById(R.id.signin);
         rback = (ImageView) findViewById(R.id.rback);
+        phone=(EditText)findViewById(R.id.phone);
 
         showPass();
 
@@ -68,12 +69,15 @@ public class SignUpFarmer extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Password does not match", Toast.LENGTH_LONG).show();
         }
 
-
+         if(phone.getText().toString().length()!=10)
+        {
+            Toast.makeText(getApplicationContext(), "Please enter a 10 digit Phone number", Toast.LENGTH_LONG).show();
+        }
 
         else {
             dbHelper.addUser(name.getText().toString(),
                     user1.getText().toString(), pass.getText().toString(),
-                    cnfrmpass.getText().toString());
+                    cnfrmpass.getText().toString(),phone.getText().toString());
 
             Toast.makeText(SignUpFarmer.this, "Data Inserted", Toast.LENGTH_LONG).show();
 

@@ -72,7 +72,7 @@ public class LoginFarmer extends AppCompatActivity {
 
                         Toast.makeText(LoginFarmer.this, "Logged In succesfully!",
                                 Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginFarmer.this, FarmerActivity.class);
+                        Intent intent = new Intent(LoginFarmer.this, CropsSelection.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginFarmer.this, "Invalid username or password!",
