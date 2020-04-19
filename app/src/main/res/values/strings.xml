@@ -13,5 +13,6 @@
     <string name="loginCap">LOGIN</string>
     <string name="aadhar_number">Aadhar Number</string>
     <string name="sign_up">Sign Up</string>
+    <string name="phone">Phone Number</string>
 
 </resources>
