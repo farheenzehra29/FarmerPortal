@@ -60,6 +60,17 @@
         android:inputType="textPassword" />
 
 
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="183dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="?attr/actionModeBackground"
+        android:drawableLeft="@drawable/aadhar_logo"
+        android:hint="@string/phone"
+        android:inputType="phone" />
+
     <CheckBox
         android:id="@+id/rshowPass"
         android:layout_width="match_parent"

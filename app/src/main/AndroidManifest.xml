@@ -9,9 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUpConsumer"></activity>
+        <activity android:name=".CropsSelection"></activity>
+        <activity android:name=".SignUpConsumer" />
         <activity android:name=".LoginConsumer" />
-        <activity android:name=".SignUpFarmer"></activity>
+        <activity android:name=".SignUpFarmer" />
         <activity android:name=".LoginFarmer" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -20,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ConsumerActivity"/>
-        <activity android:name=".FarmerActivity"/>
+        <activity android:name=".ConsumerActivity" />
+        <activity android:name=".FarmerActivity" />
+        <activity android:name=".ResultFarmer" />
     </application>
 
 </manifest>
