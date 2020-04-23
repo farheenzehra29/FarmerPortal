@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
-    android:onClick="displayFarmerList"
     android:orientation="vertical"
     tools:context="com.magnus.farmerportal.ConsumerActivity">
 
@@ -23,15 +22,141 @@
 
     <Button
         android:id="@+id/showList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="75dp"
+        android:layout_height="42dp"
         android:onClick="showFarmerList"
         android:text="SHOW"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.731"
+        app:layout_constraintHorizontal_bias="0.742"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.004" />
+        app:layout_constraintVertical_bias="0.056" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="373dp"
+        android:layout_height="455dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/backgroundimagefarmer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.576">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/cropId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20sp"
+                android:text="ID"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@id/cropId"
+                android:text="Farmer Name"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/name"
+                android:text="Price"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_toRightOf="@+id/phoneNumber"
+                android:text="Quantity"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/idValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cropId"
+                android:layout_marginTop="15sp"
+                android:paddingLeft="20sp"
+                android:text="ID"
+                android:textColor="?attr/actionMenuTextColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/listNames"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15sp"
+                android:layout_toRightOf="@+id/cropId"
+                android:text="No farmer"
+                android:textColor="?attr/actionMenuTextColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/priceEntry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneNumber"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15sp"
+                android:layout_toRightOf="@+id/name"
+                android:text="0.0"
+                android:textColor="?attr/actionMenuTextColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/quantityEntry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/quantity"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="15sp"
+                android:layout_toRightOf="@+id/phoneNumber"
+                android:text="0.0"
+                android:textColor="?attr/actionMenuTextColor"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/idConsumer"
+        android:layout_width="169dp"
+        android:layout_height="31dp"
+        android:hint=" ID Of Farmer You Want"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.379"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
+
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SUBMIT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
