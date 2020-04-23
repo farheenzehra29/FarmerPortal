@@ -23,7 +23,7 @@ public class ResultConsumer extends AppCompatActivity {
     SQLiteDatabase db;
     Cursor cursor;
     String id;
-    String cropSelected;
+    String cropSelected,farmerName,phoneNumber,location;
     Button confirmConsumer;
     String price;
     @Override
@@ -43,12 +43,12 @@ public class ResultConsumer extends AppCompatActivity {
 
         Intent intent = getIntent();
          id=intent.getStringExtra("id");
-        String farmerName=intent.getStringExtra("farmer");
-        String phoneNumber=intent.getStringExtra("number");
+         farmerName=intent.getStringExtra("farmer");
+         phoneNumber=intent.getStringExtra("number");
          price=intent.getStringExtra("price");
         quantity=intent.getStringExtra("quantity");
         cropSelected=intent.getStringExtra("crop");
-        String location=intent.getStringExtra("location");
+        location=intent.getStringExtra("location");
 
         name.setText(farmerName);
         phone.setText(phoneNumber);
@@ -77,6 +77,12 @@ public class ResultConsumer extends AppCompatActivity {
                   Toast.makeText(getApplicationContext(), "Please enter quantity less than or equal to "+quantity, Toast.LENGTH_SHORT).show();
               }
               else if(Integer.parseInt(quanF)==Integer.parseInt(quantity)){
+                 /* SQLiteDatabase db=dbHelper.getWritableDatabase();
+                  db.execSQL("DELETE FROM " + DBHelperFarmer.FARMER_DETAILS + " WHERE "
+                                  + DBHelperFarmer.FARMER_ID + " =? AND " + DBHelperFarmer.COLUMN_CROP + " =?",
+                          new String[]{id, cropSelected});
+
+                  db.close();*/
                   cursor=dbHelper.deleteCrop(Integer.parseInt(id),cropSelected);
                   int computePrice=Integer.parseInt(quantity)*Integer.parseInt(price);
                   final AlertDialog.Builder builder = new AlertDialog.Builder(ResultConsumer.this);
@@ -103,6 +109,13 @@ public class ResultConsumer extends AppCompatActivity {
                   int remain = Integer.parseInt(quantity) - Integer.parseInt(quanF);
                   int computePrice=Integer.parseInt(quanF)*Integer.parseInt(price);
                   String remainQuantity= String.valueOf(remain);
+
+                 /* SQLiteDatabase db=dbHelper.getWritableDatabase();
+                  db.execSQL("UPDATE " +DBHelperFarmer.FARMER_DETAILS +" SET "+ DBHelperFarmer.COLUMN_QUANTITY +" =?"
+                          + " WHERE "+ DBHelperFarmer.FARMER_ID +" =? AND "+ DBHelperFarmer.COLUMN_CROP +
+                          " =?",  new String[]{remainQuantity,id,cropSelected});
+
+                  db.close();*/
                   cursor = dbHelper.updateCrop(remainQuantity, id, cropSelected);
 
                   final AlertDialog.Builder builder = new AlertDialog.Builder(ResultConsumer.this);
