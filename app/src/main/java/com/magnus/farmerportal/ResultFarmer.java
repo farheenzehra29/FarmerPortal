@@ -21,6 +21,7 @@ public class ResultFarmer extends AppCompatActivity {
     int k = 0;
     DBHelperFarmer dbHelper;
     TextView show;
+    TextView show1;
     EditText user, pass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,7 @@ public class ResultFarmer extends AppCompatActivity {
         view = (Button)findViewById(R.id.view);
         logo = (Button) findViewById(R.id.logout);
         show = (TextView)findViewById(R.id.showAll);
+        show1 = (TextView)findViewById(R.id.textView3);
         user = (EditText)findViewById(R.id.user);
         pass = (EditText)findViewById(R.id.password);
        // delete=(Button)findViewById(R.id.deleteCrop);
@@ -58,7 +60,18 @@ public class ResultFarmer extends AppCompatActivity {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cursor res = dbHelper.getFarmerDetails(id);
+                Cursor res1 = dbHelper.getData1(id);
+                StringBuilder stringB1 = new StringBuilder();
+                if(res1!=null && res1.getCount()>0) {
+                    while (res1.moveToNext()) {
+                        // stringB1.append("COLUMN_NAME: "+res1.getString(1)+"\n");
+                        //stringB1.append("COLUMN_USERNAME: "+res1.getString(2)+"\n");
+                        stringB1.append("Location: " + res1.getString(6) + "\n");
+                    }
+                    show1.setText(stringB1.toString());
+                }
+
+                    Cursor res = dbHelper.getFarmerDetails(id);
                 StringBuilder stringB = new StringBuilder();
                 if(res!=null && res.getCount()>0){
                     while (res.moveToNext()){

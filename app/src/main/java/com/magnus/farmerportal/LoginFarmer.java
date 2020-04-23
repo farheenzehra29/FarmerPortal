@@ -30,6 +30,9 @@ public class LoginFarmer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_consumer);
+
+        Intent intent1=getIntent();
+        final String[] position=intent1.getStringArrayExtra("Location");
         dbHelper = new DBHelperFarmer(this);
         db = dbHelper.getReadableDatabase();
         regis = (TextView) findViewById(R.id.regis);
@@ -44,6 +47,7 @@ public class LoginFarmer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginFarmer.this, SignUpFarmer.class);
+                intent.putExtra("Location",position);
                 startActivity(intent);
                 finish();
             }

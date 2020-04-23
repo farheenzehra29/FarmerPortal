@@ -16,11 +16,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_CNFRMPASS = "cnfrmpassword";
     public static final String PHONE_NUMBER = "phone";
+    public static final String LOCATION = "address";
 
     public  SQLiteDatabase db ;
 
     public DBHelper(Context context) {
-        super(context, DB_NAME, null, 4);
+        super(context, DB_NAME, null, 6);
     }
 
 
@@ -28,7 +29,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(" CREATE TABLE " + USER_TABLE +
                 "(" + ColumnID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ COLUMN_NAME + " TEXT, " + COLUMN_USERNAME + " TEXT, " +
-                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT ," +PHONE_NUMBER +" TEXT"+")");    }
+                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT ," +PHONE_NUMBER +" TEXT, "+LOCATION+
+                "TEXT "+")");    }
 
 
     @Override
@@ -39,7 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /* Storing User details*/
 
-    public void addUser(String name, String username, String password, String cnfrmpassword,String phone) {
+    public void addUser(String name, String username, String password, String cnfrmpassword,String phone,String location) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -49,6 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(COLUMN_CNFRMPASS, cnfrmpassword);
         values.put(PHONE_NUMBER, phone);
         db.insert(USER_TABLE, null, values);
+        values.put(LOCATION,location);
         db.close();
     }
 

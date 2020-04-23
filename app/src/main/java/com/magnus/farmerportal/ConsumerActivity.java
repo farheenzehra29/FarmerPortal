@@ -46,7 +46,7 @@ public class ConsumerActivity extends AppCompatActivity {
         listfarmer=(TextView)findViewById(R.id.listNames) ;
         priceEntry=(TextView)findViewById(R.id.priceEntry);
         quanityEntry=(TextView)findViewById(R.id.quantityEntry);
-        cropID=(TextView)findViewById(R.id.cropId);
+        cropID=(TextView)findViewById(R.id.idValue);
         idConsumer=(TextView)findViewById(R.id.idConsumer);
         submit=(Button)findViewById(R.id.submit);
 
@@ -122,18 +122,21 @@ public class ConsumerActivity extends AppCompatActivity {
                                        crop=c.getString(3);
                                        price=c.getString(1);
                                        quantity=c.getString(2);
+
                                     }
                                 }
 
                             }
                         }
+
                         Intent intent=new Intent(ConsumerActivity.this,ResultConsumer.class);
                         intent.putExtra("farmer",farmerUserName);
+                      //  Log.d("ed","ssssss");
                         intent.putExtra("number",number);
                         intent.putExtra("price",price);
                         intent.putExtra("quantity",quantity);
                         intent.putExtra("crop",crop);
-
+                        startActivity(intent);
                     }
                  }
              });

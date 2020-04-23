@@ -33,9 +33,10 @@ public class LoginConsumer extends AppCompatActivity {
         setContentView(R.layout.activity_login_consumer);
         dbHelper = new DBHelper(this);
         db = dbHelper.getReadableDatabase();
+        Intent intent1=getIntent();
+        final String[] position=intent1.getStringArrayExtra("Location");
 
         regis = (TextView) findViewById(R.id.regis);
-
         username1 = (EditText) findViewById(R.id.luser);
         pass = (EditText) findViewById(R.id.lpass);
         show = (CheckBox) findViewById(R.id.showPass);
@@ -47,6 +48,7 @@ public class LoginConsumer extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginConsumer.this, SignUpConsumer.class);
+                intent.putExtra("Location",position);
                 startActivity(intent);
                 finish();
             }

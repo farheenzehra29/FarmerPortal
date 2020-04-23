@@ -24,12 +24,14 @@ public class SignUpFarmer extends AppCompatActivity {
     SQLiteDatabase db;
     CheckBox rshow;
     DBHelperFarmer dbHelper;
-
+    String userlocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_consumer);
         dbHelper = new DBHelperFarmer(this);
+        Intent intent1=getIntent();
+        final String[] position=intent1.getStringArrayExtra("Location");
 
         name = (EditText) findViewById(R.id.name);
         pass = (EditText) findViewById(R.id.password);
@@ -39,7 +41,7 @@ public class SignUpFarmer extends AppCompatActivity {
         signin = (Button) findViewById(R.id.signin);
         rback = (ImageView) findViewById(R.id.rback);
         phone=(EditText)findViewById(R.id.phone);
-
+        userlocation=position[0]+position[1]+position[2]+position[3];
         showPass();
 
 
@@ -75,11 +77,12 @@ public class SignUpFarmer extends AppCompatActivity {
         }
 
         else {
-            dbHelper.addUser(name.getText().toString(),
-                    user1.getText().toString(), pass.getText().toString(),
-                    cnfrmpass.getText().toString(),phone.getText().toString());
+             dbHelper.addUser(name.getText().toString(),
+                     user1.getText().toString(), pass.getText().toString(),
+                     cnfrmpass.getText().toString(),phone.getText().toString(),userlocation);
 
-            Toast.makeText(SignUpFarmer.this, "Data Inserted", Toast.LENGTH_LONG).show();
+
+             Toast.makeText(SignUpFarmer.this, "Data Inserted", Toast.LENGTH_LONG).show();
 
             Intent intent = new Intent(SignUpFarmer.this, LoginFarmer.class);
             startActivity(intent);

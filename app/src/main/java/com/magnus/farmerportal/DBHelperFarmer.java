@@ -17,7 +17,7 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public static final String COLUMN_PASSWORD = "password";
     public static final String COLUMN_CNFRMPASS = "cnfrmpassword";
     public static final String PHONE_NUMBER = "phone";
-
+    public static final String LOCATION = "address";
     public static final String FARMER_DETAILS = "FarmerDetails";
     public static final String COLUMN_PRICE = "price";
     public static final String COLUMN_QUANTITY = "quantity";
@@ -31,7 +31,7 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public static final String Column_id = "farmer_id";
 
     public  SQLiteDatabase db ;
-    private static final int DATABASE_VERSION =7;
+    private static final int DATABASE_VERSION =9;
     public DBHelperFarmer(Context context) {
         super(context, DB_NAME, null, DATABASE_VERSION);
     }
@@ -41,7 +41,8 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(" CREATE TABLE " + USER_TABLE +
                 "(" + ColumnID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAME + " TEXT, " + COLUMN_USERNAME + " TEXT, " +
-                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT ," +PHONE_NUMBER +" TEXT"+")");
+                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT ," +PHONE_NUMBER +" TEXT, " +LOCATION+
+                " TEXT"+")");
 
         db.execSQL("CREATE TABLE "+ FARMER_DETAILS+"("+  COLUMNID_FARMER + " INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_PRICE + " REAL, " +
                 COLUMN_QUANTITY + " INTEGER, " + COLUMN_CROP + " TEXT, "+FARMER_ID + " INTEGER, " + "FOREIGN KEY("+FARMER_ID+") REFERENCES "+USER_TABLE+
@@ -57,13 +58,14 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
             db.execSQL("DROP TABLE IF EXISTS " + FARMER_DETAILS);
+            db.execSQL("DROP TABLE IF EXISTS " + DATE_DETAILS);
             onCreate(db);
 
     }
 
 
     /* Storing User details*/
-    public void addUser(String name, String username, String password, String cnfrmpassword,String phone) {
+    public void addUser(String name, String username, String password, String cnfrmpassword,String phone,String location) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, name);
@@ -71,6 +73,7 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
         values.put(COLUMN_PASSWORD, password);
         values.put(COLUMN_CNFRMPASS, cnfrmpassword);
         values.put(PHONE_NUMBER, phone);
+        values.put(LOCATION,location);
         db.insert(USER_TABLE, null, values);
         db.close();
     }
@@ -114,6 +117,10 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT  '"+UPLOAD_DATE+"' FROM " + DATE_DETAILS + " WHERE " + Column_id + " =?", new
                 String[]{Integer.toString(id)});
+    }
+    public Cursor getData1(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT * FROM " + USER_TABLE +" WHERE "+ ColumnID + "=?" ,new String[]{Integer.toString(id)});
     }
 
     public Cursor deleteCrop(int id){

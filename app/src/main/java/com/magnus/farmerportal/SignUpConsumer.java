@@ -24,12 +24,15 @@ public class SignUpConsumer extends AppCompatActivity {
     SQLiteDatabase db;
     CheckBox rshow;
     DBHelper dbHelper;
-
+    String userlocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_consumer);
         dbHelper = new DBHelper(this);
+        Intent intent1=getIntent();
+        final String[] position=intent1.getStringArrayExtra("Location");
+         userlocation = position[0] + position[1] + position[2] + position[3];
 
         name = (EditText) findViewById(R.id.name);
         pass = (EditText) findViewById(R.id.password);
@@ -77,7 +80,8 @@ public class SignUpConsumer extends AppCompatActivity {
         else {
             dbHelper.addUser(name.getText().toString(),
                     user1.getText().toString(), pass.getText().toString(),
-                    cnfrmpass.getText().toString(),phone.getText().toString());
+                    cnfrmpass.getText().toString(),phone.getText().toString(),userlocation);
+
 
             Toast.makeText(SignUpConsumer.this, "Data Inserted", Toast.LENGTH_LONG).show();
 
