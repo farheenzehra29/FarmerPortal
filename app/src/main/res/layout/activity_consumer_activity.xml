@@ -30,6 +30,13 @@
         android:id="@+id/logout"
         android:text="Log Out"
         android:layout_marginTop="25dp"/>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:textSize="25sp"/>
+
 
     <ScrollView
         android:layout_width="match_parent"

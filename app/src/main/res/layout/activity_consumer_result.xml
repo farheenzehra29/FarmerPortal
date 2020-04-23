@@ -11,12 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Price"
+        android:textColor="#E8110202"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.635"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.566" />
+        app:layout_constraintVertical_bias="0.578" />
 
     <TextView
         android:id="@+id/displayHeading"
@@ -42,7 +44,7 @@
         android:layout_height="30dp"
         android:layout_marginTop="79dp"
         android:text="Name"
-        android:textColor="#E8110202"
+        android:textColor="#55ABFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/phoneNumber"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,16 +71,15 @@
         android:id="@+id/phoneNumber"
         android:layout_width="124dp"
         android:layout_height="31dp"
-        android:layout_marginTop="312dp"
         android:text="Phone Number"
+        android:textColor="#E8110202"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.142"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007"
-        android:textColor="#E8110202"/>
+        app:layout_constraintVertical_bias="0.45" />
 
     <TextView
         android:id="@+id/price"
@@ -113,12 +114,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Name"
+        android:textColor="#E8110202"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintHorizontal_bias="0.63"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.386" />
 
     <TextView
         android:id="@+id/phoneF"
@@ -127,31 +130,37 @@
         android:hint="Phone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        android:textColor="#E8110202"
+        android:textSize="18sp"
+        app:layout_constraintHorizontal_bias="0.645"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.459" />
 
     <TextView
         android:id="@+id/cropC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Crop"
+        android:textColor="#E8110202"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
+        app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintVertical_bias="0.525" />
 
     <TextView
         android:id="@+id/quantityF"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Quantity"
+        android:textColor="#E8110202"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintHorizontal_bias="0.667"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.64" />
