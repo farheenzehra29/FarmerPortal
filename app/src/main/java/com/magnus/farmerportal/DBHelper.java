@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public  SQLiteDatabase db ;
 
     public DBHelper(Context context) {
-        super(context, DB_NAME, null, 3);
+        super(context, DB_NAME, null, 4);
     }
 
 
