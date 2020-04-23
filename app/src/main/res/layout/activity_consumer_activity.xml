@@ -10,35 +10,41 @@
     tools:context="com.magnus.farmerportal.ConsumerActivity">
 
     <Button
+        android:id="@+id/view"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/view"
+        android:layout_marginTop="25dp"
+        android:background="@color/colorPrimary"
         android:text="Click to view"
-        android:textSize="20sp"
         android:textColor="#fff"
-        android:layout_marginTop="25dp"/>
+        android:textSize="20sp" />
+
     <Button
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:textSize="20sp"
         android:textColor="#fff"
-
+        android:background="@color/colorPrimary"
         android:id="@+id/logout"
         android:text="Log Out"
         android:layout_marginTop="25dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/backgroundimagefarmer">
 
         <TextView
+            android:id="@+id/showAll"
             android:layout_width="match_parent"
-            android:textColor="#000"
-            android:textSize="25sp"
             android:layout_height="wrap_content"
-            android:id="@+id/showAll"/>
+            android:textColor="#000"
+            android:textSize="30sp" />
     </ScrollView>
 
 </LinearLayout>
+
+
+
