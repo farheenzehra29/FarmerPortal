@@ -69,11 +69,21 @@ public class LoginFarmer extends AppCompatActivity {
                 if (cursor != null) {
                     if (cursor.getCount() > 0) {
                         cursor.moveToFirst();
-
+                        int id=cursor.getInt(cursor.getColumnIndex(DBHelperFarmer.ColumnID));
                         Toast.makeText(LoginFarmer.this, "Logged In succesfully!",
                                 Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(LoginFarmer.this, CropsSelection.class);
-                        startActivity(intent);
+
+                        if(dbHelper.getCrop(id).getCount()<=0) {
+                            Intent intent = new Intent(LoginFarmer.this, CropsSelection.class);
+                            intent.putExtra("Id", id);
+                            startActivity(intent);
+                        }
+                        if (dbHelper.getCrop(id).getCount()>0){
+                            Intent intent = new Intent(LoginFarmer.this, ResultFarmer.class);
+                            intent.putExtra("Id", id);
+                            startActivity(intent);
+                        }
+
                     } else {
                         Toast.makeText(LoginFarmer.this, "Invalid username or password!",
                                 Toast.LENGTH_SHORT).show();

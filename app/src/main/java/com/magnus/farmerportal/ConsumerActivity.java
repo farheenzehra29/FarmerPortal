@@ -1,30 +1,56 @@
 package com.magnus.farmerportal;
 
-import android.content.DialogInterface;
+/*import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Bundle;
 import android.view.View;
+import androidx.appcompat.app.AlertDialog;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.appcompat.app.AlertDialog;
+import android.widget.Toast;*/
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ConsumerActivity extends AppCompatActivity {
-    Button view, logo;
+  /*  Button view, logo;
     int k = 0;
     DBHelper dbHelper;
     TextView show;
-    EditText user, pass;
+    EditText user, pass;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consumer_activity);
-        dbHelper = new DBHelper(this);
+        setContentView(R.layout.activity_consumer);
+        String[] crops={"Ragi","Rice","Onion","Carrot","Potato"};
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, crops);
+        final AutoCompleteTextView selectedCrop = (AutoCompleteTextView)findViewById(R.id.selectCrop);
+        selectedCrop.setThreshold(2);
+
+        selectedCrop.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                selectedCrop.showDropDown();
+                return false;
+            }
+        });
+        selectedCrop.setAdapter(adapter);
+
+    }
+
+    public void showFarmerList(View view) {
+
+    }
+
+}
+
+     /*   dbHelper = new DBHelper(this);
 
         view = (Button)findViewById(R.id.view);
         logo = (Button) findViewById(R.id.logout);
@@ -93,7 +119,4 @@ public class ConsumerActivity extends AppCompatActivity {
         else
         {
             finish();
-        }
-    }
-
-}
+        }*/

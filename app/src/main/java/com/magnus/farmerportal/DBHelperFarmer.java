@@ -24,10 +24,16 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public static final String COLUMN_CROP = "crop";
     public static final String FARMER_ID = "farmerID";
     public static final String COLUMNID_FARMER = "ID";
-    public  SQLiteDatabase db ;
 
+    public static final String DATE_DETAILS = "DateDetails";
+    public static final String UPLOAD_DATE = "date";
+    public static final String  Date_ID="dateId";
+    public static final String Column_id = "farmer_id";
+
+    public  SQLiteDatabase db ;
+    private static final int DATABASE_VERSION =7;
     public DBHelperFarmer(Context context) {
-        super(context, DB_NAME, null, 3);
+        super(context, DB_NAME, null, DATABASE_VERSION);
     }
 
 
@@ -35,23 +41,28 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(" CREATE TABLE " + USER_TABLE +
                 "(" + ColumnID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_NAME + " TEXT, " + COLUMN_USERNAME + " TEXT, " +
-                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT ," +PHONE_NUMBER +"TEXT"+")");
+                COLUMN_PASSWORD + " TEXT, " + COLUMN_CNFRMPASS + " TEXT ," +PHONE_NUMBER +" TEXT"+")");
 
         db.execSQL("CREATE TABLE "+ FARMER_DETAILS+"("+  COLUMNID_FARMER + " INTEGER PRIMARY KEY AUTOINCREMENT, "+COLUMN_PRICE + " REAL, " +
-                COLUMN_QUANTITY + " INTEGER, " + FARMER_ID + " INTEGER, " + "FOREIGN KEY("+FARMER_ID+") REFERENCES "+USER_TABLE+
+                COLUMN_QUANTITY + " INTEGER, " + COLUMN_CROP + " TEXT, "+FARMER_ID + " INTEGER, " + "FOREIGN KEY("+FARMER_ID+") REFERENCES "+USER_TABLE+
+                "("+ColumnID+")"+")");
+
+        db.execSQL("CREATE TABLE "+ DATE_DETAILS+"("+  Date_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+UPLOAD_DATE + " INTEGER, " +
+                Column_id + " INTEGER, " + "FOREIGN KEY("+Column_id+") REFERENCES "+USER_TABLE+
                 "("+ColumnID+")"+")");
     }
 
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + FARMER_DETAILS);
-        onCreate(db);
+            db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE);
+            db.execSQL("DROP TABLE IF EXISTS " + FARMER_DETAILS);
+            onCreate(db);
+
     }
 
-    /* Storing User details*/
 
+    /* Storing User details*/
     public void addUser(String name, String username, String password, String cnfrmpassword,String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -64,7 +75,7 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void addCropDetails(String price, String quantity, String crop,String columnID) {
+    public void addCropDetails(String price, String quantity, String crop,Integer columnID) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_PRICE, price);
@@ -75,14 +86,41 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void addDate(long uploadDate,Integer ID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(UPLOAD_DATE, uploadDate);
+        values.put(Column_id, ID);
+        db.insert(DATE_DETAILS, null, values);
+        db.close();
+    }
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("SELECT * FROM " + USER_TABLE, null);
     }
-    public Cursor getFarmerDetails(){
+    public Cursor getFarmerDetails(int id){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("SELECT * FROM " + FARMER_DETAILS, null);
+        return db.rawQuery("SELECT * FROM " + FARMER_DETAILS + " WHERE " + FARMER_ID + " =?", new
+                String[]{Integer.toString(id)});
     }
+    public Cursor getCrop(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT '"+COLUMN_CROP+"' FROM " + FARMER_DETAILS + " WHERE " + FARMER_ID + " =?", new
+                String[]{Integer.toString(id)});
+    }
+
+    public Cursor getDate(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT  '"+UPLOAD_DATE+"' FROM " + DATE_DETAILS + " WHERE " + Column_id + " =?", new
+                String[]{Integer.toString(id)});
+    }
+
+    public Cursor deleteCrop(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("DELETE FROM " + FARMER_DETAILS + " WHERE " + FARMER_ID + " =?", new
+                String[]{Integer.toString(id)});
+    }
+
 
 }

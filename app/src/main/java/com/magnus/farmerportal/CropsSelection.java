@@ -24,6 +24,9 @@ public class CropsSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crops_selection);
 
+        Intent intent1 = getIntent();
+        final int Farmerid=intent1.getIntExtra("Id",0);
+        Toast.makeText(this,Integer.toString(Farmerid), Toast.LENGTH_SHORT).show();
 
         final ListView cropNames=(ListView)findViewById(R.id.cropNames);
         final ArrayList<String> crops=new ArrayList<String>(Arrays.asList("Ragi","Rice","Onion","Carrot","Potato"));
@@ -39,8 +42,8 @@ public class CropsSelection extends AppCompatActivity {
                 Toast.makeText(CropsSelection.this, crops.get(position)+" selected", Toast.LENGTH_SHORT).show();
                 String selectedFromList = (String) cropNames.getItemAtPosition(position);
                 Intent intent=new Intent(CropsSelection.this, FarmerActivity.class);
-                intent.putExtra("CropSelected",selectedFromList);
-               // startActivityForResult(intent,2);
+                intent.putExtra("CropSelected", selectedFromList);
+                intent.putExtra("Id",Farmerid);
                 startActivity(intent);
 
             }
