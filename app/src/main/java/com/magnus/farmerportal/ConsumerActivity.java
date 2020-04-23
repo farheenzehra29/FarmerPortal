@@ -100,19 +100,19 @@ public class ConsumerActivity extends AppCompatActivity {
              submit.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-
+                     String id="";
                     String a=idConsumer.getText().toString();
                     String cropName=selectedCrop.getText().toString();
                     if (a==""){
                         Toast.makeText(ConsumerActivity.this,"Enter farmer you want",Toast.LENGTH_LONG);
                     }
                     else{
-                        String number="",farmerUserName="",price="",quantity="",crop="";
+                        String number="",farmerUserName="",price="",quantity="",crop="",location="";
                         Cursor details = db.rawQuery("SELECT * FROM " + DBHelperFarmer.USER_TABLE + " WHERE " + DBHelperFarmer.ColumnID + " =?", new
                                 String[]{a});
                         if (details != null && details.getCount() > 0) {
                             while (details.moveToNext()) {
-                                String id = details.getString(0);
+                                 id = details.getString(0);
                                 Cursor c = db.rawQuery("SELECT * FROM " + DBHelperFarmer.FARMER_DETAILS + " WHERE " + DBHelperFarmer.FARMER_ID +  " =? AND " + DBHelperFarmer.COLUMN_CROP + " =?",
                                         new String[]{id,cropName});
                                 if (c != null && c.getCount() > 0) {
@@ -122,6 +122,7 @@ public class ConsumerActivity extends AppCompatActivity {
                                        crop=c.getString(3);
                                        price=c.getString(1);
                                        quantity=c.getString(2);
+                                       location=details.getString(6);
 
                                     }
                                 }
@@ -132,10 +133,12 @@ public class ConsumerActivity extends AppCompatActivity {
                         Intent intent=new Intent(ConsumerActivity.this,ResultConsumer.class);
                         intent.putExtra("farmer",farmerUserName);
                       //  Log.d("ed","ssssss");
+                        intent.putExtra("id",id);
                         intent.putExtra("number",number);
                         intent.putExtra("price",price);
                         intent.putExtra("quantity",quantity);
                         intent.putExtra("crop",crop);
+                        intent.putExtra("location",location);
                         startActivity(intent);
                     }
                  }

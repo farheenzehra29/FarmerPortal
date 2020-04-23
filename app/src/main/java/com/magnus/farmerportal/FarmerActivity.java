@@ -82,15 +82,26 @@ public class FarmerActivity extends AppCompatActivity {
                         new String[]{price.getText().toString(), crop.getText().toString(),quantity.getText().toString()});
 */
 
-                Calendar calendar = Calendar.getInstance();
+              /*  Calendar calendar = Calendar.getInstance();
                 //Returns current time in millis
                 long timeMilli2 = calendar.getTimeInMillis();
-                dbHelperFarmer.addDate(timeMilli2,id);
-                dbHelperFarmer.addCropDetails(price.getText().toString(),quantity.getText().toString(),crop.getText().toString(),
-                        id);
-                Intent resultIntent = new Intent(FarmerActivity.this, ResultFarmer.class);
-                resultIntent.putExtra("Id",id);
-                startActivity(resultIntent);
+                dbHelperFarmer.addDate(timeMilli2,id);*/
+                if(quantity.getText().toString().equals("") && price.getText().toString().equals(""))
+                {
+                    Toast.makeText(getApplicationContext(), "Please enter valid credentials", Toast.LENGTH_SHORT).show();
+                }
+                else if(Integer.parseInt(quantity.getText().toString()) > 20 || Integer.parseInt(quantity.getText().toString()) < 0 )
+                {
+                    Toast.makeText(getApplicationContext(), "Please enter Quantity in the Range 1 and 20", Toast.LENGTH_SHORT).show();
+                }
+                else {
+
+                    dbHelperFarmer.addCropDetails(price.getText().toString(), quantity.getText().toString(), crop.getText().toString(),
+                            id);
+                    Intent resultIntent = new Intent(FarmerActivity.this, ResultFarmer.class);
+                    resultIntent.putExtra("Id", id);
+                    startActivity(resultIntent);
+                }
             }
         });
 

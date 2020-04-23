@@ -21,7 +21,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public  SQLiteDatabase db ;
 
     public DBHelper(Context context) {
-        super(context, DB_NAME, null, 6);
+        super(context, DB_NAME, null, 8);
     }
 
 

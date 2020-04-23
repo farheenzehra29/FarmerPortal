@@ -42,7 +42,7 @@ public class ResultFarmer extends AppCompatActivity {
         pass = (EditText)findViewById(R.id.password);
        // delete=(Button)findViewById(R.id.deleteCrop);
 
-        Calendar calendar = Calendar.getInstance();
+      /*  Calendar calendar = Calendar.getInstance();
         long timeMilli2 = calendar.getTimeInMillis();
         Cursor r1 = dbHelper.getDate(id);
         if(r1!=null && r1.getCount()>0) {
@@ -56,7 +56,7 @@ public class ResultFarmer extends AppCompatActivity {
                     dbHelper.deleteCrop(id);
                 }
             }
-        }
+        }*/
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

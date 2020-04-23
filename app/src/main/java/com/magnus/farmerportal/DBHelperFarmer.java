@@ -31,7 +31,7 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
     public static final String Column_id = "farmer_id";
 
     public  SQLiteDatabase db ;
-    private static final int DATABASE_VERSION =9;
+    private static final int DATABASE_VERSION =11;
     public DBHelperFarmer(Context context) {
         super(context, DB_NAME, null, DATABASE_VERSION);
     }
@@ -123,11 +123,20 @@ public class DBHelperFarmer extends SQLiteOpenHelper {
         return db.rawQuery("SELECT * FROM " + USER_TABLE +" WHERE "+ ColumnID + "=?" ,new String[]{Integer.toString(id)});
     }
 
-    public Cursor deleteCrop(int id){
+    public Cursor deleteCrop(int id,String cropSelected){
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("DELETE FROM " + FARMER_DETAILS + " WHERE " + FARMER_ID + " =?", new
-                String[]{Integer.toString(id)});
+        return db.rawQuery("DELETE FROM " + DBHelperFarmer.FARMER_DETAILS + " WHERE "
+                        + DBHelperFarmer.FARMER_ID + " =? AND " + DBHelperFarmer.COLUMN_CROP + " =?",
+                new String[]{Integer.toString(id), cropSelected});
     }
+
+    public Cursor updateCrop(String remainQuantity,String id,String cropSelected){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("UPDATE " +DBHelperFarmer.FARMER_DETAILS +" SET "+ DBHelperFarmer.COLUMN_QUANTITY +" =?"
+                + " WHERE "+ DBHelperFarmer.FARMER_ID +" =? AND "+ DBHelperFarmer.COLUMN_CROP +
+                " =?",  new String[]{remainQuantity,id,cropSelected});
+    }
+
 
 
 }
