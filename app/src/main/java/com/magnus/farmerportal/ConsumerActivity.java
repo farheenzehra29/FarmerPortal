@@ -9,11 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;*/
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ConsumerActivity extends AppCompatActivity {
@@ -22,15 +26,20 @@ public class ConsumerActivity extends AppCompatActivity {
     DBHelper dbHelper;
     TextView show;
     EditText user, pass;*/
-
+   AutoCompleteTextView selectedCrop;
+   DBHelperFarmer dbHelperFarmer;
+   SQLiteDatabase db;
+   TextView listfarmer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consumer);
         String[] crops={"Ragi","Rice","Onion","Carrot","Potato"};
-
+        dbHelperFarmer = new DBHelperFarmer(this);
+        listfarmer=(TextView)findViewById(R.id.listNames) ;
+        db = dbHelperFarmer.getReadableDatabase();
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, crops);
-        final AutoCompleteTextView selectedCrop = (AutoCompleteTextView)findViewById(R.id.selectCrop);
+        selectedCrop = (AutoCompleteTextView)findViewById(R.id.selectCrop);
         selectedCrop.setThreshold(2);
 
         selectedCrop.setOnTouchListener(new View.OnTouchListener(){
@@ -46,6 +55,26 @@ public class ConsumerActivity extends AppCompatActivity {
 
     public void showFarmerList(View view) {
 
+              String cropName=selectedCrop.getText().toString();
+        Cursor res = db.rawQuery("SELECT * FROM " + DBHelperFarmer.FARMER_DETAILS + " WHERE " + DBHelperFarmer.COLUMN_CROP + " =?", new
+                String[]{cropName});
+          StringBuilder stringB = new StringBuilder();
+             if(res!=null && res.getCount()>0) {
+                 while (res.moveToNext()) {
+                     String id = res.getString(4);
+                     Cursor c = db.rawQuery("SELECT * FROM " + DBHelperFarmer.USER_TABLE + " WHERE " + DBHelperFarmer.ColumnID + " =?", new
+                             String[]{id});
+                     if (c != null && c.getCount() > 0) {
+                         while (c.moveToNext()) {
+                             stringB.append(c.getString(1));
+                            // String username = c.getString(2);
+                             stringB.append("\n");
+                         }
+                         listfarmer.setText(stringB.toString());
+                     }
+                 }
+                 // show.setText(stringB.toString());
+             }
     }
 
 }
